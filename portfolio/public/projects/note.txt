@@ -1,0 +1,10 @@
+Create the following project images and place them in this directory:
+- minecraft-mod.png
+- discord-bot.png
+- minecraft-server.png
+- discord-dashboard.png
+- minecraft-plugin.png
+- discord-integration.png
+
+Recommended size: 1200x675 pixels (16:9 aspect ratio)
+These images should showcase screenshots or visual representations of your projects.

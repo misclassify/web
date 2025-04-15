@@ -1,0 +1,3 @@
+Replace this file with your actual profile image.
+Recommended size: At least 500x500 pixels, preferably with a transparent background.
+This will be displayed in a circular crop on your homepage.

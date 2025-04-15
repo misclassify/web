@@ -1,0 +1,3 @@
+Replace this file with your actual favicon.ico file.
+Recommended size: 32x32 pixels or larger (multiple sizes in one .ico file is best).
+You can create a favicon from your logo or profile picture using online tools like favicon.io.

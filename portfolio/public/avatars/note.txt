@@ -1,0 +1,10 @@
+Create the following avatar images and place them in this directory:
+- alex.png
+- sarah.png
+- michael.png
+- emily.png
+- david.png
+- lisa.png
+
+Recommended size: 100x100 pixels
+These should be profile pictures for your testimonials/reviews section.
