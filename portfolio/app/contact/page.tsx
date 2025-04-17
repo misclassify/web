@@ -31,54 +31,52 @@ export default function ContactPage() {
   const [error, setError] = useState("")
   const [emailJSLoaded, setEmailJSLoaded] = useState(false)
 
+  // Check if EmailJS is already loaded from layout.tsx
   useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    script.async = true
-    script.onload = () => {
-      window.emailjs.init("21yvczpienMFAKD5B")
+    if (window.emailjs) {
       setEmailJSLoaded(true)
-    }
-    document.body.appendChild(script)
+    } else {
+      // Fallback if not loaded in layout
+      const checkEmailJS = setInterval(() => {
+        if (window.emailjs) {
+          setEmailJSLoaded(true)
+          clearInterval(checkEmailJS)
+        }
+      }, 500)
 
-    return () => {
-      document.body.removeChild(script)
+      return () => clearInterval(checkEmailJS)
     }
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    setFormState({
+      ...formState,
+      [e.target.id]: e.target.value,
     })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
-  setError("")
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError("")
 
-  try {
-    await window.emailjs.send(
-      "service_smer5wp", 
-      "template_ygimfns",
-      {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      }
-    )
+    try {
+      await window.emailjs.send("service_smer5wp", "template_ygimfns", {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject,
+        message: formState.message,
+      })
 
-    setIsSubmitted(true)
-    setFormData({ name: "", email: "", subject: "", message: "" })
-  } catch (error) {
-    setError("Failed to send message. Please try again.")
-    console.error(error)
-  } finally {
-    setIsSubmitting(false)
+      setIsSubmitted(true)
+      setFormState({ name: "", email: "", subject: "", message: "" })
+    } catch (error) {
+      setError("Failed to send message. Please try again.")
+      console.error(error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
-}
 
   return (
     <div className="container px-4 py-16 md:px-6 md:py-24 animate-fade-in">
