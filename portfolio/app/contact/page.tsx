@@ -33,19 +33,27 @@ export default function ContactPage() {
 
   // Check if EmailJS is already loaded from layout.tsx
   useEffect(() => {
-    if (window.emailjs) {
-      setEmailJSLoaded(true)
-    } else {
-      // Fallback if not loaded in layout
-      const checkEmailJS = setInterval(() => {
-        if (window.emailjs) {
-          setEmailJSLoaded(true)
-          clearInterval(checkEmailJS)
-        }
-      }, 500)
-
-      return () => clearInterval(checkEmailJS)
+    const checkEmailJS = () => {
+      if (window.emailjs) {
+        console.log("EmailJS loaded successfully")
+        setEmailJSLoaded(true)
+        return true
+      }
+      return false
     }
+
+    // Check immediately
+    if (checkEmailJS()) return
+
+    // If not loaded, set up an interval to check
+    const interval = setInterval(() => {
+      if (checkEmailJS()) {
+        clearInterval(interval)
+      }
+    }, 500)
+
+    // Clean up
+    return () => clearInterval(interval)
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -61,18 +69,29 @@ export default function ContactPage() {
     setError("")
 
     try {
-      await window.emailjs.send("service_smer5wp", "template_ygimfns", {
+      if (!window.emailjs) {
+        throw new Error("EmailJS is not loaded")
+      }
+
+      console.log("Attempting to send email with EmailJS...")
+
+      // Log the service and template IDs for debugging
+      console.log("Using service ID: service_smer5wp")
+      console.log("Using template ID: template_ygimfns")
+
+      const response = await window.emailjs.send("service_smer5wp", "template_ygimfns", {
         from_name: formState.name,
         from_email: formState.email,
         subject: formState.subject,
         message: formState.message,
       })
 
+      console.log("Email sent successfully:", response)
       setIsSubmitted(true)
       setFormState({ name: "", email: "", subject: "", message: "" })
     } catch (error) {
-      setError("Failed to send message. Please try again.")
-      console.error(error)
+      console.error("EmailJS error details:", error)
+      setError("Failed to send your message. Please try again or contact me directly at misclassifyy@gmail.com")
     } finally {
       setIsSubmitting(false)
     }
