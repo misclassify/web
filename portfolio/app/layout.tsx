@@ -212,19 +212,18 @@ export default function RootLayout({
         {/* EmailJS */}
         <Script
           src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-          strategy="beforeInteractive"
-          onLoad={() => {
-            console.log("EmailJS script loaded")
-            if (window.emailjs) {
-              window.emailjs
-                .init("21yvczpienMFAKD5B")
-                .then(() => console.log("EmailJS initialized successfully"))
-                .catch((err) => console.error("EmailJS initialization error:", err))
-            } else {
-              console.error("EmailJS failed to load")
-            }
-          }}
+          strategy="afterInteractive"
+          id="emailjs-script"
         />
+        <Script id="emailjs-init" strategy="afterInteractive">
+          {`
+            (function() {
+              if (window.emailjs) {
+                window.emailjs.init("21yvczpienMFAKD5B");
+              }
+            })();
+          `}
+        </Script>
       </body>
     </html>
   )
