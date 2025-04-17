@@ -31,28 +31,34 @@ export default function ContactPage() {
   const [error, setError] = useState("")
   const [emailJSLoaded, setEmailJSLoaded] = useState(false)
 
-  // Check if EmailJS is already loaded from layout.tsx
   useEffect(() => {
-    const checkEmailJS = () => {
-      if (window.emailjs) {
-        setEmailJSLoaded(true)
-        return true
-      }
-      return false
+    // Only run in browser environment
+    if (typeof window === "undefined") return
+
+    // Check if EmailJS is already loaded from layout.tsx
+    if (window.emailjs) {
+      setEmailJSLoaded(true)
+      return
     }
 
-    // Check immediately
-    if (checkEmailJS()) return
-
-    // If not loaded, set up an interval to check
-    const interval = setInterval(() => {
-      if (checkEmailJS()) {
-        clearInterval(interval)
+    // If not loaded, load it manually
+    const script = document.createElement("script")
+    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    script.async = true
+    script.onload = () => {
+      if (window.emailjs) {
+        window.emailjs.init("21yvczpienMFAKD5B")
+        setEmailJSLoaded(true)
       }
-    }, 500)
+    }
+    document.body.appendChild(script)
 
-    // Clean up
-    return () => clearInterval(interval)
+    return () => {
+      // Only remove if we added it
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+    }
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -64,15 +70,17 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!emailJSLoaded) {
+      setError("Email service is still loading. Please try again in a moment.")
+      return
+    }
+
     setIsSubmitting(true)
     setError("")
 
     try {
-      if (!window.emailjs) {
-        throw new Error("EmailJS is not loaded")
-      }
-
-      const response = await window.emailjs.send("service_smer5wp", "template_ygimfns", {
+      await window.emailjs.send("service_smer5wp", "template_ygimfns", {
         from_name: formState.name,
         from_email: formState.email,
         subject: formState.subject,
@@ -80,8 +88,13 @@ export default function ContactPage() {
       })
 
       setIsSubmitted(true)
-      setFormState({ name: "", email: "", subject: "", message: "" })
-    } catch (error) {
+      setFormState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+    } catch (err) {
       setError("Failed to send your message. Please try again or contact me directly at misclassifyy@gmail.com")
     } finally {
       setIsSubmitting(false)
@@ -175,6 +188,16 @@ export default function ContactPage() {
                 <Button type="submit" className="w-full hover-lift" disabled={isSubmitting || !emailJSLoaded}>
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
+
+                {/* Fallback contact method */}
+                <div className="text-center mt-2">
+                  <p className="text-sm text-muted-foreground">
+                    Or email me directly at{" "}
+                    <a href="mailto:misclassifyy@gmail.com" className="text-primary hover:underline">
+                      misclassifyy@gmail.com
+                    </a>
+                  </p>
+                </div>
               </form>
             )}
           </CardContent>
