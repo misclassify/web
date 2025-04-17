@@ -47,49 +47,38 @@ export default function ContactPage() {
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.id]: e.target.value,
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
     })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  e.preventDefault()
+  setIsSubmitting(true)
+  setError("")
 
-    if (!emailJSLoaded) {
-      setError("Email service is still loading. Please try again in a moment.")
-      return
-    }
+  try {
+    await window.emailjs.send(
+      "service_smer5wp", 
+      "template_ygimfns",
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      }
+    )
 
-    setIsSubmitting(true)
-    setError("")
-
-    try {
-      await window.emailjs.send(
-        "service_smer5wp",
-        "template_ygimfns",
-        {
-          from_name: formState.name,
-          from_email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-        },
-      )
-
-      setIsSubmitted(true)
-      setFormState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      })
-    } catch (err) {
-      console.error("Failed to send email:", err)
-      setError("Failed to send your message. Please try again or contact me directly at misclassifyy@gmail.com")
-    } finally {
-      setIsSubmitting(false)
-    }
+    setIsSubmitted(true)
+    setFormData({ name: "", email: "", subject: "", message: "" })
+  } catch (error) {
+    setError("Failed to send message. Please try again.")
+    console.error(error)
+  } finally {
+    setIsSubmitting(false)
   }
+}
 
   return (
     <div className="container px-4 py-16 md:px-6 md:py-24 animate-fade-in">
