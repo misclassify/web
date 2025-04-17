@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowLeft, Check } from "lucide-react"
 
@@ -11,6 +11,12 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { SocialLinks } from "@/components/social-links"
+
+declare global {
+  interface Window {
+    emailjs: any
+  }
+}
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -22,6 +28,23 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
+  const [emailJSLoaded, setEmailJSLoaded] = useState(false)
+
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    script.async = true
+    script.onload = () => {
+      window.emailjs.init("21yvczpienMFAKD5B")
+      setEmailJSLoaded(true)
+    }
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({
@@ -30,13 +53,29 @@ export default function ContactPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
 
-    // Simulate form submission - in a real app, you'd send this to your API
-    setTimeout(() => {
-      setIsSubmitting(false)
+    if (!emailJSLoaded) {
+      setError("Email service is still loading. Please try again in a moment.")
+      return
+    }
+
+    setIsSubmitting(true)
+    setError("")
+
+    try {
+      await window.emailjs.send(
+        "service_smer5wp",
+        "template_ygimfns",
+        {
+          from_name: formState.name,
+          from_email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+        },
+      )
+
       setIsSubmitted(true)
       setFormState({
         name: "",
@@ -44,7 +83,12 @@ export default function ContactPage() {
         subject: "",
         message: "",
       })
-    }, 1500)
+    } catch (err) {
+      console.error("Failed to send email:", err)
+      setError("Failed to send your message. Please try again or contact me directly at misclassifyy@gmail.com")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -130,7 +174,8 @@ export default function ContactPage() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full hover-lift" disabled={isSubmitting}>
+                {error && <p className="text-destructive text-sm">{error}</p>}
+                <Button type="submit" className="w-full hover-lift" disabled={isSubmitting || !emailJSLoaded}>
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
