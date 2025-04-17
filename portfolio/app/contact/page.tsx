@@ -80,12 +80,16 @@ export default function ContactPage() {
     setError("")
 
     try {
-      await window.emailjs.send("service_smer5wp", "template_ygimfns", {
-        from_name: formState.name,
-        from_email: formState.email,
-        subject: formState.subject,
-        message: formState.message,
-      })
+      await window.emailjs.send(
+  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+  {
+    from_name: formState.name,
+    from_email: formState.email,
+    subject: formState.subject,
+    message: formState.message,
+  }
+)
 
       setIsSubmitted(true)
       setFormState({
