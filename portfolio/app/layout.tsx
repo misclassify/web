@@ -84,7 +84,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-    generator: 'v0.dev'
 }
 
 export const viewport: Viewport = {
@@ -209,10 +208,16 @@ export default function RootLayout({
 
         {/* Vercel Analytics */}
         <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
+
+        {/* EmailJS */}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+          strategy="lazyOnload"
+          onLoad={() => {
+            window.emailjs?.init("21yvczpienMFAKD5B")
+          }}
+        />
       </body>
     </html>
   )
 }
-
-
-import './globals.css'
