@@ -35,7 +35,6 @@ export default function ContactPage() {
   useEffect(() => {
     const checkEmailJS = () => {
       if (window.emailjs) {
-        console.log("EmailJS loaded successfully")
         setEmailJSLoaded(true)
         return true
       }
@@ -73,12 +72,6 @@ export default function ContactPage() {
         throw new Error("EmailJS is not loaded")
       }
 
-      console.log("Attempting to send email with EmailJS...")
-
-      // Log the service and template IDs for debugging
-      console.log("Using service ID: service_smer5wp")
-      console.log("Using template ID: template_ygimfns")
-
       const response = await window.emailjs.send("service_smer5wp", "template_ygimfns", {
         from_name: formState.name,
         from_email: formState.email,
@@ -86,11 +79,9 @@ export default function ContactPage() {
         message: formState.message,
       })
 
-      console.log("Email sent successfully:", response)
       setIsSubmitted(true)
       setFormState({ name: "", email: "", subject: "", message: "" })
     } catch (error) {
-      console.error("EmailJS error details:", error)
       setError("Failed to send your message. Please try again or contact me directly at misclassifyy@gmail.com")
     } finally {
       setIsSubmitting(false)
