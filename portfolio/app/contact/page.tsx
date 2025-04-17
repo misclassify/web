@@ -47,7 +47,7 @@ export default function ContactPage() {
     script.async = true
     script.onload = () => {
       if (window.emailjs) {
-        window.emailjs.init("21yvczpienMFAKD5B")
+        window.emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY)
         setEmailJSLoaded(true)
       }
     }
