@@ -68,11 +68,13 @@ export default function Home() {
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2">
               <FeaturedProject
-                title="Minecraft Mod"
-                description="A custom Minecraft mod that adds new biomes, items, and mechanics to enhance gameplay."
-                image="/projects/minecraft-mod.png"
-                tags={["Forge", "Java", "Minecraft"]}
-                link="/projects/minecraft-mod"
+                title="GhostieSMP"
+                description="GhostieSMP is a cross-play Minecraft server where I served as a Server Admin. Players from the BadBoyHalo community (Ghosties) and beyond could join to play, hang out, and create lore together.
+
+The server encourages a friendly, lore-driven experience with a variety of plugins and places a strong focus on community safety and creativity, offering a welcoming environment for players to relax and connect."
+                image="/projects/minecraft-server.png"
+                tags={["PaperMC", "Cross-Play", "Server Management"]}
+                link="/projects/minecraft-server"
               />
               <FeaturedProject
                 title="Discord Bot"
