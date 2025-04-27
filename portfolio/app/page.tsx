@@ -21,8 +21,7 @@ export default function Home() {
                     Hi, I&apos;m <span className="text-primary">Misclassify</span>
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    I develop high-quality Minecraft mods and Discord bots while occasionally staffing Discord
-                    communities to create engaging user experiences.
+                    I manage and build thriving Discord communities and Minecraft servers, focusing on creating engaging and welcoming experiences for everyone..
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
