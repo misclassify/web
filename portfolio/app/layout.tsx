@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://misclassify.dev",
+    url: "https://misclassify.vercel.app",
     title: "Misclassify - Minecraft & Discord Developer",
     description: "Minecraft mods and Discord bots that enhance gameplay and unite communities",
     siteName: "Misclassify",
@@ -125,13 +125,13 @@ export default function RootLayout({
           content="Showcasing Minecraft modding, Discord bots, and community-building projects."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://v0-portfolio-website-design-flax-five.vercel.app" />
-        <meta property="og:image" content="https://v0-portfolio-website-design-flax-five.vercel.app/og-image.png" />
+        <meta property="og:url" content="https://misclassify.vercel.app" />
+        <meta property="og:image" content="https://misclassify.vercel.app/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Misclassify Portfolio" />
         <meta name="twitter:description" content="Minecraft and Discord development showcase." />
-        <meta name="twitter:image" content="https://v0-portfolio-website-design-flax-five.vercel.app/og-image.png" />
-        <link rel="canonical" href="https://v0-portfolio-website-design-flax-five.vercel.app" />
+        <meta name="twitter:image" content="https://misclassify.vercel.app/og-image.png" />
+        <link rel="canonical" href="https://misclassify.vercel.app" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <script
