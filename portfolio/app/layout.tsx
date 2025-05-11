@@ -20,7 +20,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://misclassify.dev"),
+  metadataBase: new URL("https://misclassify.vercel.app"),
   title: {
     default: "Misclassify - Minecraft & Discord Developer",
     template: "%s | Misclassify",
