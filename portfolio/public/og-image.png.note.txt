@@ -1,7 +1,0 @@
-Create an Open Graph image for social media sharing.
-Recommended size: 1200x630 pixels
-Include:
-- Your name/logo "Misclassify" prominently
-- A tagline like "Minecraft & Discord Developer"
-- Visual elements representing Minecraft and Discord (subtle blocks or Discord logo)
-- Your brand colors (Discord blurple and Minecraft green)
