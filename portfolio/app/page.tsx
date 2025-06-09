@@ -75,7 +75,7 @@ export default function Home() {
                     The server encourages a friendly, lore-driven experience with a variety of plugins and places a strong focus on community safety and creativity, offering a welcoming environment for players to relax and connect.
                   </>
                 }
-                image="/projects/minecraft-server.png"
+                image="/projects/GhostieSMP.png"
                 tags={["PaperMC", "Cross-Play", "Server Management"]}
                 link="/projects/minecraft-server"
               />
