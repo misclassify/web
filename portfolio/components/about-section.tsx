@@ -11,21 +11,19 @@ export function AboutSection() {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">About Me</h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I'm a passionate developer specializing in Minecraft mods and Discord bots with over 5 years of
-                experience creating engaging digital experiences for gaming communities.
+                hiya, welcome to my corner of the web! :3
               </p>
               <p>
-                My journey began with simple Minecraft server plugins, which evolved into comprehensive mods that
-                transform gameplay. For Discord, I've built bots that help server owners manage communities of thousands
-                of members while keeping engagement high.
+                i go by misclassify (or mis/misc).
               </p>
               <p>
-                What sets my work apart is the focus on user experience and performance. I believe that great mods and
-                bots should feel like natural extensions of the platforms they enhance, not awkward additions.
+                i spend way too much time online, usually being chronically online and lazy, or just exploring new things.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new games, contributing to open source projects, or
-                helping moderate several gaming communities.
+                this site is a place to show off my portfolio of projects i’ve worked on, along with whatever else i feel like sharing
+              </p>
+              <p>
+                 feel free to take a look around, there’s always something to check out (:
               </p>
             </div>
             <div className="mt-6">
