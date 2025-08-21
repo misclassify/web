@@ -11,20 +11,20 @@ export function AboutSection() {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">About Me</h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                hiya, welcome to my corner of the web! :3
-                i go by misclassify (or mis/misc).
+                hiya, welcome to my corner of the web! :3 i
+                go by misclassify (or mis/misc)
               </p>
               <p>
-                i'm someone who spends way too much time online,
-                usually being chrinically online and lazy or just exploring new things
+                i'm someone who spends way too much time online, usually
+                being chrinically online and lazy or just exploring new things
               </p>
               <p>
                 this site is a place to show off my portfolio of projects that i’ve worked on, and
                 whatever else i feel like sharing on here!
               </p>
               <p>
-                feel free to take a look around,
-                there's always something to check out (:
+                feel free to take a look around, there's
+                always something to check out (:
             </div>
             <div className="mt-6">
               <Link href="/experience" passHref>
