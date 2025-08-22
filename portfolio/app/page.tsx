@@ -80,11 +80,11 @@ export default function Home() {
                 link="/projects/minecraft-server"
               />
               <FeaturedProject
-                title="Discord Bot"
-                description="A multipurpose Discord bot with moderation, music, and fun commands for server management."
-                image="/projects/discord-bot.png"
-                tags={["Discord.js", "Node.js", "API"]}
-                link="/projects/discord-bot"
+                title="The Backstreets"
+                description="The Backstreets is a community Discord server I created and manage, designed as a welcoming space for people to connect, socialize, and engage in events. Built with a focus on organization, moderation, and inclusivity, the server provides a safe and enjoyable environment with active staff, interactive activities, and rewards that encourage participation."
+                image="/projects/BackstreetsBanner.png"
+                tags={["Ownership", "Community Management", "Moderation"]}
+                link="/projects/the-backstreets"
               />
             </div>
             <div className="flex justify-center">
